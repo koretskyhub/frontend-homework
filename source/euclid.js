@@ -1,13 +1,15 @@
 'use strict';
 
-const euclid = (...numbers) => {
-	  for ( var x = Math.abs(numbers[ 0 ]), i = 1; i < numbers.length; i++ ) {
-	    var y = Math.abs(numbers[ i ]);
-	    if (y===0) continue;
-	    while ( x && y ) {
-	      x > y ? x %= y : y %= x;
+const euclid = (...numbers) => numbers.reduce(function(subNod, currNum)
+{
+	subNod = Math.abs(subNod);
+	currNum = Math.abs(currNum);
+	if (currNum!==0) {
+		while ( subNod && currNum ) {
+	     	subNod > currNum ? subNod %= currNum : currNum %= subNod;
 	    }
-	    x += y;
-	  }
-	  return x;
-};
+	    return subNod+currNum;
+	} else {
+			return subNod;
+		}
+}, 0);
